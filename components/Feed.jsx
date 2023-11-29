@@ -19,7 +19,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  // const [filteredPosts, setFilteredPosts] = useState([]);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value.toLowerCase());
@@ -40,22 +40,22 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  useEffect(() => {
-    const getFilteredPosts = async () => {
-      const filteredArray = [];
-      posts.forEach((item) => {
-        if (
-          item.creator.username.toLowerCase().includes(searchText) ||
-          item.prompt.toLowerCase().includes(searchText) ||
-          item.tag.toLowerCase().includes(searchText)
-        ) {
-          filteredArray.push(item);
-        }
-      });
-      setFilteredPosts(filteredArray);
-    };
-    getFilteredPosts();
-  }, [searchText]);
+  // useEffect(() => {
+  //   const getFilteredPosts = async () => {
+  //     const filteredArray = [];
+  //     posts.forEach((item) => {
+  //       if (
+  //         item.creator.username.toLowerCase().includes(searchText) ||
+  //         item.prompt.toLowerCase().includes(searchText) ||
+  //         item.tag.toLowerCase().includes(searchText)
+  //       ) {
+  //         filteredArray.push(item);
+  //       }
+  //     });
+  //     setFilteredPosts(filteredArray);
+  //   };
+  //   getFilteredPosts();
+  // }, [searchText]);
 
   return (
     <section className="feed">
@@ -69,10 +69,7 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <PromptCardList
-        data={filteredPosts.length > 0 ? filteredPosts : posts}
-        handleTagClick={handleTagClick}
-      />
+      <PromptCardList data={posts} handleTagClick={handleTagClick} />
     </section>
   );
 };
